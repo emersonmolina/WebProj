@@ -7,7 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace WebApp1.Models
 {
     // Add profile data for application users by adding properties to the ApplicationUser class
-    public class ApplicationUser : IdentityUser
+    public class IdentityUserLogin : IdentityUser
     {       
     }
 }
