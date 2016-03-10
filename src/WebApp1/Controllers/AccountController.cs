@@ -63,7 +63,7 @@ namespace WebApp1.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation(1, "User logged in.");
+                    _logger.LogInformation(1, "Usuário logado.");
                     return RedirectToLocal(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -72,12 +72,12 @@ namespace WebApp1.Controllers
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning(2, "User account locked out.");
+                    _logger.LogWarning(2, "Conta bloqueada.");
                     return View("Lockout");
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Usuário ou senha inválido.");
                     return View(model);
                 }
             }
@@ -104,7 +104,7 @@ namespace WebApp1.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, DataCriacao = DateTime.Now, Nome = model.Nome };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -115,7 +115,7 @@ namespace WebApp1.Controllers
                     //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
                     //    "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation(3, "User created a new account with password.");
+                    _logger.LogInformation(3, "Usuário criado com sucesso.");
                     return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
                 AddErrors(result);

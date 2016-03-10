@@ -30,11 +30,12 @@ namespace WebApp1.Models
             // Add your customizations after calling base.OnModelCreating(builder);
 
             builder.Entity<ApplicationUser>()
+              .ToTable("USUARIO")
               .Property(b => b.Id)
               .IsRequired();
 
-            builder.Entity<IdentityUserLogin>()
-            .ToTable("Logins");
+            //builder.Entity<IdentityUserLogin>()
+            //.ToTable("Logins");
 
         }
     }
