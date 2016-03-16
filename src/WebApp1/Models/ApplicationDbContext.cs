@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
+using WebApp1.Models;
+using WebApp1.ViewModels.Grupo;
 
 namespace WebApp1.Models
 {
@@ -34,9 +36,15 @@ namespace WebApp1.Models
               .Property(b => b.Id)
               .IsRequired();
 
-            //builder.Entity<IdentityUserLogin>()
-            //.ToTable("Logins");
+
+            builder.Entity<Grupo>()
+             .ToTable("GRUPO")
+             .Property(b => b.PK_GRUP_CD_CODIGO)
+             .IsRequired();
 
         }
+
+        public DbSet<Grupo> Grupo { get; set; }
+
     }
 }
